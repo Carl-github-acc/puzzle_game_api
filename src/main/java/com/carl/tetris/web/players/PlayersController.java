@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("players")
+@RequestMapping("player")
 public class PlayersController {
 
     @Autowired
@@ -40,13 +40,13 @@ public class PlayersController {
         return response;
     }
 
-    @GetMapping(value = "position",
+    @GetMapping(value = "/position",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public PlayerPositionResponse getPosition(@RequestParam("roomName") String roomName, @RequestParam("playerToken") String playerToken) {
         return playersService.getCurrentPosition(roomName, playerToken);
     }
 
-    @GetMapping(value = "ground",
+    @GetMapping(value = "/ground",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public PlayerGetGroundResponse roomStatus(@RequestParam("roomName") String roomName, @RequestParam("playerToken") String playerToken) {
         return playersService.getGround(roomName, playerToken);

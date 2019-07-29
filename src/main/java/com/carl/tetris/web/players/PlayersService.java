@@ -10,9 +10,7 @@ import com.carl.tetris.web.room.models.JoinRoomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class PlayersService {
@@ -22,12 +20,10 @@ public class PlayersService {
     @Autowired
     private GameService gameService;
 
-    private Map<String, GameModel> roomNameGameMap = new HashMap<>();
-
     public PlayerJoinResponse joinGame(PlayerJoinRequest playerJoinRequest, String ipAddress) {
-        String playerToken = PlayerToken.generatePlayerToken(ipAddress);
+        String playerToken = PlayerToken.generatePlayerToken(String.valueOf(System.currentTimeMillis()));
         JoinRoomResponse joinResponse = roomService.joinRoom(playerJoinRequest, playerToken);
-        return new PlayerJoinResponse(joinResponse.getStatus().name(), playerToken, joinResponse.getPlayersInRoom(), joinResponse.getReadyToStart());
+        return new PlayerJoinResponse(playerJoinRequest.getRoomName(), joinResponse.getStatus().name(), playerToken, joinResponse.getPlayersInRoom(), joinResponse.getReadyToStart());
     }
 
     public PlayerMoveResponse move(PlayerMoveRequest moveRequest) {
@@ -42,12 +38,12 @@ public class PlayersService {
         return new PlayerAddGroundResponse(addRequest.getPlayerToken(), addRequest.getRoomName(), addRequest.getAddBlocks(), currentGround);
     }
 
-    public PlayerPositionResponse getCurrentPosition(String playerToken, String roomName) {
+    public PlayerPositionResponse getCurrentPosition(String roomName, String playerToken) {
         GameModel game = roomService.getGame(roomName);
         return new PlayerPositionResponse(playerToken, roomName, gameService.getPosition(playerToken, game));
     }
 
-    public PlayerGetGroundResponse getGround(String playerToken, String roomName) {
+    public PlayerGetGroundResponse getGround(String roomName, String playerToken) {
         GameModel game = roomService.getGame(roomName);
         return new PlayerGetGroundResponse(playerToken, roomName, gameService.getGround(playerToken, game));
     }

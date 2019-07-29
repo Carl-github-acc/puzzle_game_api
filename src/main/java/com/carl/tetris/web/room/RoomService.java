@@ -52,11 +52,11 @@ public class RoomService {
     public RoomStatusResponse getRoomStatus(String roomName) {
         if (roomNameGameMap.containsKey(roomName)) {
             if (roomNameGameMap.get(roomName).getPlayerTokens().size() >= MAX_NUM_PLAYERS) {
-                return new RoomStatusResponse(RoomStatus.READY.name(), true);
+                return new RoomStatusResponse(RoomStatus.READY.name(), roomNameGameMap.get(roomName).getPlayerTokens(), true);
             }
-            return new RoomStatusResponse(RoomStatus.NEED_MORE_PLAYERS.name(), false);
+            return new RoomStatusResponse(RoomStatus.NEED_MORE_PLAYERS.name(), new ArrayList<>(), false);
         } else {
-            return new RoomStatusResponse(RoomStatus.EMPTY_ROOM.name(), false);
+            return new RoomStatusResponse(RoomStatus.EMPTY_ROOM.name(), new ArrayList<>(), false);
         }
     }
 

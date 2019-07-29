@@ -11,5 +11,5 @@ import java.util.Map;
 public class BlockModel {
     private int y;
     private int x;
-    private String blockType;
+    private String shape;
 }

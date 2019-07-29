@@ -9,6 +9,6 @@ import java.util.List;
 @Value
 public class RoomStatusResponse {
     private String status;
-    private List<String> playersInRoom = new ArrayList<>();
+    private List<String> playersInRoom;
     private Boolean readyToStart;
 }
