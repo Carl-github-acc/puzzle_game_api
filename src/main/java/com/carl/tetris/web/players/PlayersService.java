@@ -4,6 +4,7 @@ import com.carl.tetris.domain.helper.PlayerToken;
 import com.carl.tetris.web.game.models.BlockModel;
 import com.carl.tetris.web.game.models.GameModel;
 import com.carl.tetris.web.game.models.GameService;
+import com.carl.tetris.web.game.models.ShapeModel;
 import com.carl.tetris.web.players.models.*;
 import com.carl.tetris.web.room.RoomService;
 import com.carl.tetris.web.room.models.JoinRoomResponse;
@@ -28,8 +29,8 @@ public class PlayersService {
 
     public PlayerMoveResponse move(PlayerMoveRequest moveRequest) {
         GameModel game = roomService.getGame(moveRequest.getRoomName());
-        BlockModel movedPosition = gameService.movePlayer(moveRequest.getPlayerToken(), moveRequest.getMoveToPosition(), game);
-        return new PlayerMoveResponse(moveRequest.getPlayerToken(), moveRequest.getRoomName(), moveRequest.getMoveToPosition(), movedPosition);
+        ShapeModel movedPosition = gameService.movePlayer(moveRequest.getPlayerToken(), moveRequest.getShape(), game);
+        return new PlayerMoveResponse(moveRequest.getPlayerToken(), moveRequest.getRoomName(), moveRequest.getShape(), movedPosition);
     }
 
     public PlayerAddGroundResponse addGround(PlayerAddGroundRequest addRequest) {

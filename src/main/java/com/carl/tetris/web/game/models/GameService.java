@@ -19,17 +19,21 @@ public class GameService {
         return createNewPlayer(playerToken, game);
     }
 
-    public BlockModel movePlayer(String playerToken, BlockModel movePosition, GameModel game) {
+    public ShapeModel movePlayer(String playerToken, ShapeModel movePosition, GameModel game) {
         game.getCurrentShapeControlledMap().put(playerToken, movePosition);
         return game.getCurrentShapeControlledMap().get(playerToken);
     }
 
     public List<BlockModel> addGround(String playerToken, List<BlockModel> addBlocks, GameModel game) {
-        game.getPlayerGroundMap().get(playerToken).addAll(addBlocks);
+        if (game.getPlayerGroundMap().containsKey(playerToken)) {
+            game.getPlayerGroundMap().get(playerToken).addAll(addBlocks);
+        } else {
+            game.getPlayerGroundMap().put(playerToken, addBlocks);
+        }
         return game.getPlayerGroundMap().get(playerToken);
     }
 
-    public BlockModel getPosition(String playerToken, GameModel game) {
+    public ShapeModel getPosition(String playerToken, GameModel game) {
         return game.getCurrentShapeControlledMap().get(playerToken);
     }
 
