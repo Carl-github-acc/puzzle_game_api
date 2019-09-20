@@ -2,13 +2,15 @@ package com.carl.tetris.web.room;
 
 import com.carl.tetris.domain.code.RoomStatus;
 import com.carl.tetris.web.game.models.GameModel;
-import com.carl.tetris.web.game.models.GameService;
+import com.carl.tetris.web.game.GameService;
 import com.carl.tetris.web.players.models.PlayerJoinRequest;
 import com.carl.tetris.web.room.models.JoinRoomResponse;
 import com.carl.tetris.web.room.models.RoomStatusResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -62,5 +64,16 @@ public class RoomService {
 
     public GameModel getGame(String roomName) {
         return roomNameGameMap.get(roomName);
+    }
+
+    @Scheduled(fixedRate = 1800000)
+    private void roomOldGames() {
+        List<String> removeOldGames = new ArrayList<>();
+        for (String roomName: roomNameGameMap.keySet()) {
+            if (LocalDateTime.now().isAfter(roomNameGameMap.get(roomName).getStartTime().plusMinutes(30))) {
+                removeOldGames.add(roomName);
+            }
+        }
+        roomNameGameMap.keySet().removeIf(key -> removeOldGames.contains(key));
     }
 }

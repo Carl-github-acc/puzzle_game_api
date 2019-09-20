@@ -3,7 +3,7 @@ package com.carl.tetris.web.players;
 import com.carl.tetris.domain.helper.PlayerToken;
 import com.carl.tetris.web.game.models.BlockModel;
 import com.carl.tetris.web.game.models.GameModel;
-import com.carl.tetris.web.game.models.GameService;
+import com.carl.tetris.web.game.GameService;
 import com.carl.tetris.web.game.models.ShapeModel;
 import com.carl.tetris.web.players.models.*;
 import com.carl.tetris.web.room.RoomService;

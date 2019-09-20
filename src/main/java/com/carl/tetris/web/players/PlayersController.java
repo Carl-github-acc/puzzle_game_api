@@ -35,8 +35,8 @@ public class PlayersController {
     @PostMapping(value = "/addGround",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public PlayerAddGroundResponse addGround(@RequestBody PlayerAddGroundRequest addGroundRequest, HttpServletRequest request) {
-        PlayerAddGroundResponse response = playersService.addGround(addGroundRequest);
+    public PlayerAddGroundResponse addGround(@RequestBody PlayerAddGroundRequest addRequest, HttpServletRequest request) {
+        PlayerAddGroundResponse response = playersService.addGround(addRequest);
         return response;
     }
 
