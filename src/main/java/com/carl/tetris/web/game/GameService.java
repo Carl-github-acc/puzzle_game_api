@@ -8,8 +8,17 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class to manage current game parameters (blocks in place, shapes been controlled etc.)
+ */
 @Service
 public class GameService {
+    /**
+     * Create a new player for the game
+     * @param playerToken
+     * @param game
+     * @return
+     */
     public GameModel createNewPlayer(String playerToken, GameModel game) {
         game.getPlayerTokens().add(playerToken);
         game.getPlayerGroundMap().put(playerToken, new ArrayList<>());

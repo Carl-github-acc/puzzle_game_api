@@ -5,6 +5,9 @@ import lombok.experimental.UtilityClass;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Utility class to handle player tokens
+ */
 @UtilityClass
 public class PlayerToken {
     /**

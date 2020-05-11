@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model to hold the properties of each block
+ */
 @Value
 public class BlockModel {
     private int y;

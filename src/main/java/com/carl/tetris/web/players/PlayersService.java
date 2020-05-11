@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Used to handle commands directed by the player
+ */
 @Service
 public class PlayersService {
     @Autowired

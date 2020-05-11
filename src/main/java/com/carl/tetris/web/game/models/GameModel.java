@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model used to hold current game parameters
+ */
 @Value
 public class GameModel {
 
