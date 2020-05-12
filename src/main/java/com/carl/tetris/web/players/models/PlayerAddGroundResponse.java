@@ -6,6 +6,9 @@ import lombok.Value;
 
 import java.util.List;
 
+/**
+ * Response model for adding new ground
+ */
 @Value
 public class PlayerAddGroundResponse {
     private String playerToken;

@@ -5,6 +5,9 @@ import com.carl.tetris.web.game.models.ShapeModel;
 import lombok.Data;
 import lombok.Value;
 
+/**
+ * Response model for when a player moves a shape
+ */
 @Value
 public class PlayerMoveResponse {
     private String playerToken;

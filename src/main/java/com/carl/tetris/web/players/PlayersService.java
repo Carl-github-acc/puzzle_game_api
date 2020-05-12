@@ -18,11 +18,13 @@ import java.util.List;
  */
 @Service
 public class PlayersService {
-    @Autowired
     private RoomService roomService;
-
-    @Autowired
     private GameService gameService;
+
+    public PlayersService(@Autowired RoomService roomService, @Autowired GameService gameService) {
+        this.roomService = roomService;
+        this.gameService = gameService;
+    }
 
     public PlayerJoinResponse joinGame(PlayerJoinRequest playerJoinRequest, String ipAddress) {
         String playerToken = PlayerToken.generatePlayerToken(String.valueOf(System.currentTimeMillis()));

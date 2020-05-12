@@ -6,6 +6,9 @@ import lombok.Value;
 
 import java.util.List;
 
+/**
+ * Response model for getting current ground
+ */
 @Value
 public class PlayerGetGroundResponse {
     private String playerToken;

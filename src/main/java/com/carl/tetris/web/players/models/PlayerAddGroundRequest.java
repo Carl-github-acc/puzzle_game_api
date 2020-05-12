@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Request model used to add new ground
+ */
 @Data
 public class PlayerAddGroundRequest {
     private String playerToken;

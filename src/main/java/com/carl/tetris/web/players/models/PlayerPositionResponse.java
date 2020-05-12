@@ -6,6 +6,9 @@ import lombok.Value;
 
 import java.util.List;
 
+/**
+ * Response model for currently controlled shape position of the player
+ */
 @Value
 public class PlayerPositionResponse {
     private String playerToken;

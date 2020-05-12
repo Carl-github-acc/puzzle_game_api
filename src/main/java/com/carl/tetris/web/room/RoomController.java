@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("room")
 public class RoomController {
 
-    @Autowired
-    RoomService roomService;
+    private RoomService roomService;
+
+    public RoomController (@Autowired RoomService roomService) {
+        this.roomService = roomService;
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public RoomStatusResponse roomStatus(@RequestParam("roomName") String roomName) {
