@@ -18,6 +18,9 @@ import java.util.Map;
 
 import static com.carl.tetris.domain.code.JoinRoomStatus.*;
 
+/**
+ * Service class handling requests that control aspects of the room
+ */
 @Service
 public class RoomService {
     @Autowired
@@ -30,6 +33,9 @@ public class RoomService {
      */
     private static int MAX_NUM_PLAYERS = 2;
 
+    /**
+     * Used to automatically delete game rooms when it reachs the maximum allotted room number
+     */
     private Map<String, GameModel> roomNameGameMap = new LinkedHashMap<String, GameModel>() {
         protected boolean removeEldestEntry(Map.Entry<String, GameModel> eldest)
         {
@@ -37,6 +43,13 @@ public class RoomService {
         }
     };
 
+    /**
+     * Join a room
+     *
+     * @param playerJoinRequest - Player join room rquest
+     * @param playerToken - Player token
+     * @return Status indicating whether joining the room succeeded or not
+     */
     public JoinRoomResponse joinRoom(PlayerJoinRequest playerJoinRequest, String playerToken) {
         if (roomNameGameMap.containsKey(playerJoinRequest.getRoomName())) {
             if (roomNameGameMap.get(playerJoinRequest.getRoomName()).getPlayerTokens().size() >= MAX_NUM_PLAYERS) {
@@ -51,7 +64,12 @@ public class RoomService {
         }
     }
 
-    public RoomStatusResponse getRoomStatus(String roomName) {
+    /**
+     * Gets the current room status
+     * @param roomName - room name
+     * @return The current room status
+     */
+     RoomStatusResponse getRoomStatus(String roomName) {
         if (roomNameGameMap.containsKey(roomName)) {
             if (roomNameGameMap.get(roomName).getPlayerTokens().size() >= MAX_NUM_PLAYERS) {
                 return new RoomStatusResponse(RoomStatus.READY.name(), roomNameGameMap.get(roomName).getPlayerTokens(), true);
@@ -62,10 +80,18 @@ public class RoomService {
         }
     }
 
+    /**
+     * Gets the game that's associated with the room
+     * @param roomName
+     * @return The game that's associated with the room
+     */
     public GameModel getGame(String roomName) {
         return roomNameGameMap.get(roomName);
     }
 
+    /**
+     * Automatic scheduler used to remove old game rooms
+     */
     @Scheduled(fixedRate = 1800000)
     private void roomOldGames() {
         List<String> removeOldGames = new ArrayList<>();
@@ -74,6 +100,6 @@ public class RoomService {
                 removeOldGames.add(roomName);
             }
         }
-        roomNameGameMap.keySet().removeIf(key -> removeOldGames.contains(key));
+        roomNameGameMap.keySet().removeIf(removeOldGames::contains);
     }
 }

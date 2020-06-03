@@ -7,6 +7,9 @@ import lombok.Value;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Response model for join room
+ */
 @Value
 public class JoinRoomResponse {
     private JoinRoomStatus status;

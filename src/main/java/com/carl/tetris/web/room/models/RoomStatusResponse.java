@@ -6,6 +6,9 @@ import lombok.Value;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Response model for getting the current room status
+ */
 @Value
 public class RoomStatusResponse {
     private String status;

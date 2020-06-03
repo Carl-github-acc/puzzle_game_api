@@ -37,36 +37,34 @@ public class PlayersController {
     /**
      * Controller to move a player controlled shape
      * @param moveRequest - Request to move the tetris shape
-     * @param request - HTTP request
      * @return The new position the shape is moved to
      */
     @PostMapping(value = "/move",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public PlayerMoveResponse move(@RequestBody PlayerMoveRequest moveRequest, HttpServletRequest request) {
+    public PlayerMoveResponse move(@RequestBody PlayerMoveRequest moveRequest) {
         PlayerMoveResponse response = playersService.move(moveRequest);
         return response;
     }
 
     /**
-     *
-     * @param addRequest
-     * @param request
-     * @return
+     * Add ground blocks to the player
+     * @param addRequest - Add ground request
+     * @return The new ground block
      */
     @PostMapping(value = "/addGround",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public PlayerAddGroundResponse addGround(@RequestBody PlayerAddGroundRequest addRequest, HttpServletRequest request) {
+    public PlayerAddGroundResponse addGround(@RequestBody PlayerAddGroundRequest addRequest) {
         PlayerAddGroundResponse response = playersService.addGround(addRequest);
         return response;
     }
 
     /**
-     *
-     * @param roomName
-     * @param playerToken
-     * @return
+     * Get the current position of the player
+     * @param roomName - room name
+     * @param playerToken - player token
+     * @return Current position of the shape controlled by the player
      */
     @GetMapping(value = "/position",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -75,10 +73,10 @@ public class PlayersController {
     }
 
     /**
-     *
-     * @param roomName
-     * @param playerToken
-     * @return
+     * Get the current ground blocks
+     * @param roomName - Room name
+     * @param playerToken - Player token
+     * @return The current ground blocks
      */
     @GetMapping(value = "/ground",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
